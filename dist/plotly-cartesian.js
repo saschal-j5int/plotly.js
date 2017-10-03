@@ -1,5 +1,5 @@
 /**
-* plotly.js (cartesian) v1.30.1
+* plotly.js (cartesian) v1.30.1-j5int
 * Copyright 2012-2017, Plotly, Inc.
 * All rights reserved.
 * Licensed under the MIT license
@@ -29355,7 +29355,7 @@ exports.svgAttrs = {
 var Plotly = require('./plotly');
 
 // package version injected by `npm run preprocess`
-exports.version = '1.30.1';
+exports.version = '1.30.1-j5int';
 
 // inject promise polyfill
 require('es6-promise').polyfill();
@@ -30306,7 +30306,13 @@ exports.formatDate = function(x, fmt, tr, calendar) {
 
     calendar = isWorldCalendar(calendar) && calendar;
 
-    if(fmt) return modDateFormat(fmt, x, calendar);
+    if(fmt) {
+        if (typeof fmt == 'function') {
+            return fmt(x)
+        } else {
+            return modDateFormat(fmt, x, calendar);
+        }
+    }
 
     if(calendar) {
         try {
@@ -41738,7 +41744,13 @@ function numFormat(v, ax, fmtoverride, hover) {
         if(ax.hoverformat) tickformat = ax.hoverformat;
     }
 
-    if(tickformat) return d3.format(tickformat)(v).replace(/-/g, MINUS_SIGN);
+    if (tickformat) {
+        if (typeof tickformat === 'function') {
+            return tickformat(v)
+        } else {
+            return d3.format(tickformat)(v).replace(/-/g, MINUS_SIGN);
+        }
+    }
 
     // 'epsilon' - rounding increment
     var e = Math.pow(10, -tickRound) / 2;
@@ -45379,13 +45391,13 @@ module.exports = {
         
     },
     tickformat: {
-        valType: 'string',
+        valType: 'any',
         dflt: '',
         
         
     },
     hoverformat: {
-        valType: 'string',
+        valType: 'any',
         dflt: '',
         
         
