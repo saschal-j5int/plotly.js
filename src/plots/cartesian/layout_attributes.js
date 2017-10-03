@@ -477,12 +477,13 @@ module.exports = {
         ].join(' ')
     },
     tickformat: {
-        valType: 'string',
+        valType: 'any',
         dflt: '',
         role: 'style',
         editType: 'ticks',
         description: [
-            'Sets the tick label formatting rule using d3 formatting mini-languages',
+            'Is either a function which is called with the tick value and returns the formatted value or',
+            'it is the tick label formatting rule using d3 formatting mini-languages',
             'which are very similar to those in Python. For numbers, see:',
             'https://github.com/d3/d3-format/blob/master/README.md#locale_format',
             'And for dates see:',
@@ -493,12 +494,13 @@ module.exports = {
         ].join(' ')
     },
     hoverformat: {
-        valType: 'string',
+        valType: 'any',
         dflt: '',
         role: 'style',
         editType: 'none',
         description: [
-            'Sets the hover text formatting rule using d3 formatting mini-languages',
+            'Is either a function which is called with the tick value and returns the formatted value or',
+            'it is the hover text formatting rule using d3 formatting mini-languages',
             'which are very similar to those in Python. For numbers, see:',
             'https://github.com/d3/d3-format/blob/master/README.md#locale_format',
             'And for dates see:',

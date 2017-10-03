@@ -464,7 +464,13 @@ exports.formatDate = function(x, fmt, tr, calendar) {
 
     calendar = isWorldCalendar(calendar) && calendar;
 
-    if(fmt) return modDateFormat(fmt, x, calendar);
+    if(fmt) {
+        if (typeof fmt == 'function') {
+            return fmt(x)
+        } else {
+            return modDateFormat(fmt, x, calendar);
+        }
+    }
 
     if(calendar) {
         try {
